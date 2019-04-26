@@ -78,5 +78,5 @@ theme: hexo-theme-landfarz-master
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/guanganggang/ggg.github.io.git
+  repo: https://github.com/guanganggang/guanganggang.github.io.git
   branch: master

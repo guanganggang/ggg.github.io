@@ -1,2 +1,4 @@
 /node_modules/
 /.npmignore
+.deploy_git/
+/public
