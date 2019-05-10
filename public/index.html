@@ -62,62 +62,70 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-04-26T06:00:28.000Z"><a href="/2019/04/26/测试/">2019-04-26</a></time>
+        <time datetime="2019-04-25T16:00:00.000Z"><a href="/2019/04/26/互联网分层架构的本质/">2019-04-26</a></time>
       
       
   
-    <h1 class="title"><a href="/2019/04/26/测试/">测试</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
-        </div>
-        
-        
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-26T05:57:01.050Z"><a href="/2019/04/26/hello-world/">2019-04-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/26/hello-world/">Hello World</a></h1>
+    <h1 class="title"><a href="/2019/04/26/互联网分层架构的本质/">互联网分层架构的本质</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/17572648-985bde5bed275948.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>上图是一个典型的互联网分层架构：</p>
+<ul>
+<li><strong>客户端层</strong>：典型调用方是browser或者APP</li>
+<li><strong>站点应用层</strong>：实现核心业务逻辑，从下游获取数据，对上游返回html或者json</li>
+<li><strong>数据-缓存层</strong>：加速访问存储</li>
+<li><strong>数据-数据库层</strong>：固化数据存储</li>
+</ul>
+<p>如果实施了服务化，这个分层架构图可能是这样：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/17572648-63029c4cf583ed76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>中间多了一个<strong>服务层</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/17572648-a434e2d4f116a359.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p><strong>同一个层次的内部</strong>，例如端上的APP，以及web-server，也都有进行MVC分层：</p>
+<ul>
+<li><strong>view层</strong>：展现</li>
+<li><strong>control层</strong>：逻辑</li>
+<li><strong>model层</strong>：数据</li>
+</ul>
+<p>可以看到，每个工程师骨子里，都潜移默化的实施着分层架构。</p>
+<p><strong>那么，互联网分层架构的本质究竟是什么呢？</strong><br>如果我们仔细思考会发现，不管是跨进程的分层架构，还是进程内的MVC分层，都是一个“<strong>数据移动</strong>”，然后“<strong>被处理</strong>”和“<strong>被呈现</strong>”的过程，归根结底一句话：互联网分层架构，是一个数据移动，处理，呈现的过程，其中<strong>数据移动是整个过程的核心</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/17572648-188ac762083d3271.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>如上图所示：<br>数据处理和呈现要CPU计算，<strong>CPU是固定不动的</strong>：</p>
+<ul>
+<li>db/service/web-server都部署在固定的集群上</li>
+<li>端上，不管是browser还是APP，也有固定的CPU处理</li>
+</ul>
+<p><strong>数据是移动的</strong>：</p>
+<ul>
+<li>跨进程移动：数据从数据库和缓存里，转移到service层，到web-server层，到client层</li>
+<li>同进程移动：数据从model层，转移到control层，转移到view层</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/17572648-28ac1537b92b55f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>数据要移动，所以有两个东西很重要：</p>
+<ul>
+<li>数据传输的格式</li>
+<li>数据在各层次的形态</li>
+</ul>
+<p>先看数据传输的格式，即协议很重要：</p>
+<ul>
+<li>service与db/cache之间，二进制协议/文本协议是数据传输的载体</li>
+<li>web-server与service之间，RPC的二进制协议是数据传输的载体</li>
+<li>client和web-server之间，http协议是数据传输的载体</li>
+</ul>
+<p>再看数据在各层次的形态，以用户数据为例：</p>
+<ul>
+<li>db层，数据是以“行”为单位存在的row(uid, name, age)</li>
+<li>cache层，数据是以kv的形式存在的kv(uid -&gt; User)</li>
+<li>service层，会把row或者kv转化为对程序友好的User对象</li>
+<li>web-server层，会把对程序友好的User对象转化为对http友好的json对象</li>
+<li>client层：最终端上拿到的是json对象</li>
+</ul>
+<p><strong>结论：互联网分层架构的本质，是数据的移动</strong>。</p>
+<p><strong>总结</strong></p>
+<ul>
+<li>互联网分层架构的本质，是数据的移动</li>
+<li>互联网分层架构中，数据的传输格式（协议）与数据在各层次的形态很重要</li>
+<li>互联网分层架构演进的核心原则与方法：封装与复用</li>
+</ul>
 
       
     </div>
@@ -160,11 +168,7 @@
   <ul class="entry">
     
       <li>
-        <a href="/2019/04/26/测试/">测试</a>
-      </li>
-    
-      <li>
-        <a href="/2019/04/26/hello-world/">Hello World</a>
+        <a href="/2019/04/26/互联网分层架构的本质/">互联网分层架构的本质</a>
       </li>
     
   </ul>
